@@ -1,56 +1,61 @@
-const CATEGORIES = [
-  { title: '의류', items: ['상의', '바지', '원피스', '스커트', '아우터', '언더웨어'] },
-  {
-    title: '가방',
-    items: [
-      '숄더백',
-      '토트백',
-      '에코/캔버스백',
-      '백팩',
-      '크로스백',
-      '캐리어/여행가방',
-      '보스턴백',
-      '웨이스트백',
-      '클러치',
-      '기타가방',
-      '가방 액세서리',
-    ],
-  },
-  {
-    title: '신발',
-    items: [
-      '스니커즈',
-      '샌들',
-      '플랫 슈즈',
-      '로퍼',
-      '힐/펌프스',
-      '슬리퍼',
-      '부츠',
-      '신발 액세서리',
-    ],
-  },
-  {
-    title: '액세서리',
-    items: [
-      '모자',
-      '벨트',
-      '양말',
-      '시계',
-      '헤어 액세서리',
-      '아이웨어',
-      '지갑/카드케이스',
-      '스카프/카라',
-      '넥타이',
-      '머플러',
-      '장갑',
-    ],
-  },
-  {
-    title: '주얼리',
-    items: ['귀걸이', '목걸이', '팔찌', '반지', '발찌', '브로치/펜던트'],
-  },
-];
+import Link from 'next/link';
+import { NavGroup } from '../molecules/NavGroup';
+import { SubCategory } from '@/src/constants/categories';
+import { CATEGORIES } from '@/src/constants/categories';
 
 export const Header = () => {
-  return <header>header</header>;
+  return (
+    <header>
+      <div className="flex-col border-b border-black/10 bg-[#e9ecef]">
+        {/* 상위 nav */}
+        <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between px-6 py-6 md:px-10">
+          <Link href="/" className="font-serif text-2xl tracking-[0.16em] uppercase">
+            PIN STITCH
+          </Link>
+
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-10 text-sm tracking-[0.08em] md:flex"
+          >
+            <Link href="#" className="transition-colors hover:text-[#ff3f33]">
+              New
+            </Link>
+            <Link href="#" className="transition-colors hover:text-[#ff3f33]">
+              Women
+            </Link>
+            <Link href="#" className="transition-colors hover:text-[#ff3f33]">
+              Men
+            </Link>
+            <Link href="#" className="transition-colors hover:text-[#ff3f33]">
+              Magazine
+            </Link>
+            <Link href="#" className="transition-colors hover:text-[#ff3f33]">
+              Live
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-4 text-xs tracking-[0.08em] uppercase md:text-sm">
+            <button type="button" className="cursor-pointer transition-colors hover:text-[#ff3f33]">
+              Search
+            </button>
+            <button type="button" className="cursor-pointer transition-colors hover:text-[#ff3f33]">
+              Login
+            </button>
+            <button type="button" className="cursor-pointer transition-colors hover:text-[#ff3f33]">
+              Cart(0)
+            </button>
+          </div>
+        </div>
+
+        {/* 하위 nav */}
+        <div className="border-b border-black/10 bg-[#e9ecef] px-30 py-6">
+          <nav className="flex gap-10">
+            {CATEGORIES.map((cat) => (
+              <NavGroup category={cat} key={cat.slug} />
+            ))}
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
 };
